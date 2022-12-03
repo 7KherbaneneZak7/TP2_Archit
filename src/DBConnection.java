@@ -8,7 +8,8 @@ public class DBConnection {
 		String url = "jdbc:mysql://localhost:3306/" + BDD;
 		String user = "root";
 		String passwd = "";
-	    private Connection conn;
+	    private static Connection conn;
+		private static DBConnection instance;
 
 	   
 	    public DBConnection() throws SQLException {
@@ -20,7 +21,15 @@ public class DBConnection {
 			return conn;
 		}
 
-
+		public static DBConnection getInstance() throws SQLException {
+			if (instance == null) {
+				instance = new DBConnection();
+			} else if (instance.getConn().isClosed()) {
+				instance = new DBConnection();
+			}
+	
+			return instance;
+		}
 		
 	
 }
