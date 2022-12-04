@@ -4,13 +4,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 public class EtudiantService implements InterfaceEtudiantService{
+	private InterfaceEtudiantRepository StudRep;
+    private InterfaceUniversiteRepository UnivRep;
+	private IJournal  AffichageListes;
+	public EtudiantService(InterfaceEtudiantRepository EtudRep ,InterfaceUniversiteRepository UnivRep,  IJournal AffichageListes) {
+		super();
+		this.StudRep = EtudRep;
+		this.UnivRep = UnivRep;
+		this.AffichageListes = AffichageListes;
+   }
 	
 	@Override
 	public
 	boolean inscription (int matricule, String nom, String prenom, String email,String pwd, int id_universite) throws SQLException	
 	{
-		InterfaceEtudiantRepository StudRep= new EtudiantRepository();
-	    InterfaceUniversiteRepository UnivRep= new UniversiteRepository();
+		
 	    InterfaceEtudiant stud = new Etudiant(matricule, nom, prenom, email,pwd,id_universite);
 	    InterfaceUniversite univ=UnivRep.GetById(id_universite);
 	    
@@ -48,6 +56,7 @@ public class EtudiantService implements InterfaceEtudiantService{
 	    
 		
 	}
+	
 	
 	
 	

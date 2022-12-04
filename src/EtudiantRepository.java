@@ -13,15 +13,18 @@ public class EtudiantRepository implements InterfaceEtudiantRepository {
 
 		DBConnection BD= new DBConnection();
 		Connection connect=BD.getConn();
-		
+		IJournal AffichageListes = new AffichageComposite();
 		Statement stmt = connect.createStatement();
 		String sql = "INSERT into etudiant values (" + E.getMatricule() + ",'" + E.getNom() + "','" + E.getPrenom() + "','" + E.getEmail() + "'," +E.getNbLivreMensuel_Autorise() + "," +E.getNbLivreEmprunte() + "," +E.getId_universite()+")";
 		int rs = stmt.executeUpdate(sql);
 		
 		if (rs == 1){
 				System.out.println("log : ajout dans la BD r�ussi de l'�tudiant  du Matricule" + E.getMatricule());
+				AffichageDateClasse.setClasseName("EtudiantRepository");
+				AffichageListes.outPut_Msg("log : ajout dans la BD réussi de l'étudiant  du Matricule" + E.getMatricule());
 			}else if (rs == 0){
 				System.out.println("log : Echec de l'ajout dans la BD de l'�tudiant  du Matricule" + E.getMatricule());
+				AffichageListes.outPut_Msg("log : Echec de l'ajout dans la BD de l'�tudiant  du Matricule" + E.getMatricule());
 			}
 		connect.close();
 	 }

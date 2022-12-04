@@ -15,7 +15,7 @@ public class AffichageComposite implements IJournal  {
     public void outPut_Msg(String message) {
         
         for (IJournal affichageType : AffichageListes) {
-            System.out.println(affichageType + "\n");
+            affichageType.outPut_Msg(message);
         }
     }
 }
